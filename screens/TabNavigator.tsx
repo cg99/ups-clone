@@ -4,7 +4,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import CustomersScreen from './CustomersScreen';
 import OrdersScreen from './OrdersScreen';
 import { useNavigation } from '@react-navigation/native';
-import { Icon } from 'react-native-vector-icons/Icon';
+// import { Ionicons } from '@expo/vector-icons';
+// import Icon from 'react-native-vector-icons/Entypo';
+import { Icon } from '@rneui/themed';
+
 
 
 export type TabNavigatorParamList = {
@@ -30,15 +33,15 @@ const TabNavigator = () => {
                 if (route.name === 'Customers') {
                     return (
                         <Icon
-                            name="users"
-                            // type="entypo"
+                            name='users'
+                            type="entypo"
                             color={focused ? 'lightblue' : 'gray'}
                         />)
                 } else if (route.name === 'Orders') {
                     return (
                         <Icon
-                            name="box"
-                            // type="entypo"
+                            name='box'
+                            type="entypo"
                             color={focused ? 'orange' : 'gray'}
                         />)
                 }
