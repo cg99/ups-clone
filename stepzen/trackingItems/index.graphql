@@ -1,0 +1,33 @@
+type Item {
+  item_id: Int
+  name: String
+  price: Float
+  quantity: Int
+}
+
+type TrackingItems {
+  customer_id: String
+  items: [Item]
+  customer: Customer
+    @materializer(
+      query: "getCustomerById",
+      arguments: [{name: "id", field: "customer_id"}]
+    )
+}
+
+type TrackingItemsList {
+  name: ID
+  value: TrackingItems
+}
+
+type Query {
+  getTrackingItemsById(id: ID!): TrackingItems
+    @rest(
+      endpoint: "https://ups-clone-backend-366c9-default-rtdb.firebaseio.com/trackingItems/$id.json"
+    )
+  getTrackingItems: [TrackingItemsList]
+    @rest(
+      endpoint: "https://ups-clone-backend-366c9-default-rtdb.firebaseio.com/trackingItems.json"
+      transforms: [{pathpattern: [], editor: "objectToArray"}]
+    )
+}
