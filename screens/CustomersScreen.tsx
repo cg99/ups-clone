@@ -24,7 +24,7 @@ const CustomersScreen = () => {
 
     const { data, error, loading } = useQuery(GET_CUSTOMERS);
 
-    console.debug(data, loading, error)
+    // console.debug(data, loading, error)
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -46,10 +46,11 @@ const CustomersScreen = () => {
                 onChangeText={text => setInput(text)}
                 containerStyle={tw('bg-white pt-5 pb-0 px-10')}
             />
-            <Text>len: {data?.getCustomers.length == null ? 'true' : 'false'}</Text>
-            {!loading && data?.getCustomers.map(({ name: ID, value: { email, name } }: CustomerResponse) => (
-                <CustomerCard key={ID} name={name} email={email} userId={ID} />
-            ))}
+
+            {data?.getCustomers?.filter((customer: CustomerList) => customer.value.name.includes(input))
+                .map(({ name: ID, value: { email, name } }: CustomerResponse) => (
+                    <CustomerCard key={ID} name={name} email={email} userId={ID} />
+                ))}
         </ScrollView>
     )
 }

@@ -19,12 +19,13 @@ const useCustomerOrders = (userId: string) => {
             City: value.City,
             Lat: value.Lat,
             Lng: value.Lng,
+            trackingItems: value.trackingItems,
         }))
 
-        const customerOrders: Order[] = orders.filter(order => order.trackingItems.customer_id === userId);
+        const customerOrders: Order[] = orders.filter((order) => order.trackingItems.customer_id === userId);
 
         setOrders(customerOrders);
-    }, [data])
+    }, [data, userId])
 
 
     return { error, loading, orders }
