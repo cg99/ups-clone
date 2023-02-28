@@ -36,7 +36,6 @@ type Items = {
     Lat: number;
     Lng: number;
     trackingItems: TrackingItems;
-     
   }
   
   type OrderList = {

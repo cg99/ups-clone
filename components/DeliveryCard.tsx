@@ -6,21 +6,23 @@ import MapView, { Marker } from 'react-native-maps';
 
 type Props = {
     order: Order;
+    fullWidth?: boolean;
 }
 
-const DeliveryCard = ({ order }: Props) => {
+const DeliveryCard = ({ order, fullWidth }: Props) => {
     const tw = useTailwind();
 
     return (
-        <Card containerStyle={[tw('rounded-lg my-2 p-0'), {
+        <Card containerStyle={[tw(`${fullWidth ? 'rounded-none m-0' : 'rounded-lg my-2'}`), {
+            padding: 0,
             paddingTop: 16,
-            backgroundColor: '#59c1cc',
+            backgroundColor: fullWidth ? '#eb6a7c' : '#59c1cc',
             shadowColor: 'black',
             shadowOffset: { width: 0, height: 2 },
             shadowOpacity: 0.2,
             shadowRadius: 4,
         }]}>
-            <View>
+            <View style={fullWidth && { height: "100%" }}>
                 <Icon
                     name="box"
                     type='entypo'
@@ -61,7 +63,7 @@ const DeliveryCard = ({ order }: Props) => {
                         latitudeDelta: 0.005,
                     }}
 
-                    style={[tw('w-full'), { height: 200 }]}
+                    style={[tw('w-full'), { flexGrow: 1 }, !fullWidth && { height: 200 }]}
                 >
                     {order.Lat && order.Lng && (
                         <Marker
